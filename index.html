@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Sports Stat Searcher</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #search-bar {
+            width: 300px;
+            padding: 8px;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Super Sport Stat Searcher</h1>
+
+    <label for="search-bar">Search:</label>
+    <input type="text" id="search-bar" placeholder="Enter Here">
+
+    <button onclick="runProgram()">Search</button>
+
+    <div id="result">
+        <!-- The result of the running program will be displayed here -->
+    </div>
+
+    <script>
+        function runProgram() {
+            // Add your running program logic here
+            // You can use the search bar value by accessing document.getElementById('search-bar').value
+            // Display the result in the 'result' div
+            var searchTerm = document.getElementById('search-bar').value;
+            var resultDiv = document.getElementById('result');
+            
+            // Example: Display the search term as the result
+            resultDiv.innerHTML = 'Running program with search term: ' + searchTerm;
+        }
+    </script>
+</body>
+</html>
