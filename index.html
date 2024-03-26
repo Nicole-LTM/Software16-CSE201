@@ -25,9 +25,15 @@
 
     <h1>Super Sport Stat Searcher</h1>
 
+    <div>
+    <input type="radio" name="flag" value="player">
+    <label for="player">Player</label>
+    <input type="radio"  name="flag" value="team">
+    <label for="team">Team</label>
+    <br>
     <label for="search-bar">Search:</label>
     <input type="text" id="search-bar" placeholder="Enter Here">
-
+    </div>
     <button onclick="runProgram()">Search</button>
 
 
@@ -42,9 +48,15 @@
             // Display the result in the 'result' div
             var searchTerm = document.getElementById('search-bar').value;
             var resultDiv = document.getElementById('result');
-            
+            var radio = document.getElementsByName('flag');
+            var type;
+            for (let i = 0; i < radio.length; i++) {
+              if (radio[i].checked) {
+                type = radio[i].value;
+              }
+            }
             // Example: Display the search term as the result
-            resultDiv.innerHTML = 'Running program with search term: ' + searchTerm;
+            resultDiv.innerHTML = 'Running program with search term: ' + searchTerm + '. This object is of type: ' + type;
         }
     </script>
 </body>
