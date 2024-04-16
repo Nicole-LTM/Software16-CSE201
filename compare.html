@@ -24,7 +24,13 @@
         #title {
           text-align: center;
         }
-        #shared-stats {
+        #better-player {
+          background-color: darkgreen;
+          border-style: solid;
+          border-color: white;
+        }
+        #worse-player {
+          background-color: darkred;
           border-style: solid;
           border-color: white;
         }
@@ -50,23 +56,21 @@
       </div>
     </div>
   </nav>
-  <div class = "container-fluid"> 
-    <div class = "row"> 
-      <div class = "col-8 col-md-8">
-        <div id = "name-div" class = "row-md-6 row-6">
-          <h1>INSERT THE NAME IN THIS DIV</h1>
-        </div>
-        <div id = "shared-stats" class = "row-md-6 row-6" >
-          <h1> Team Stats go here</h1>
-          <ul id = "stat-list">
-            <!-- empty bullet point list for you to add the stats to if that makes it easier -->
-          </ul>
-        </div>
-      </div>
-      <div class = "col-4 col-md-4">
-        <img src="https://static.www.nfl.com/image/private/f_auto,q_auto/league/vm13kgvkrqzjyf08s2n0" alt="Devon Witherspoon" class = "img-fluid" height = "400px" width = "400px">
-      </div>
+  <div class = "container-fluid">
+    <div class = "row">
+    <div class = "col-md-6 col-6" id = "better-player">
+      <h1>The details for the better player will go here.</h1>
+      <ul>
+        <!-- Stats will be placed here in a ul -->
+      </ul>
+    </div>
+    <div class = "col-md-6 col-6" id = "worse-player">
+      <h1>The details for the worse player will go here.</h1>
+      <ul>
+        <!-- Stats will be placed here in a ul -->
+      </ul>
     </div>
   </div>
+</div> 
 </body>
 </html>
