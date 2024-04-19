@@ -75,43 +75,7 @@
         </form>
     </div>
     <script>
-    document.getElementById("createAccountForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent the form from submitting
     
-    // Get input values
-    var newUsername = document.getElementById("username").value;
-    var newPassword = document.getElementById("password").value;
-    
-    // Fetch CSV file
-    fetch('./Users.csv')
-        .then(response => response.text())
-        .then(data => {
-            // Check if username already exists
-            var rows = data.split('\n');
-            var users = rows.map(row => row.split(','));
-            var existingUser = users.find(user => user[0] === newUsername);
-            
-            if (existingUser) {
-                document.getElementById("createUserMessage").innerText = "Username already exists. Please choose another one.";
-            } else {
-                // Append new user to CSV
-                var newUserRow = newUsername + ',' + newPassword + '\n';
-                var updatedData = data + newUserRow;
-                
-                // Update CSV file
-                fetch('./Users.csv', {
-                    method: 'POST',
-                    body: updatedData
-                })
-                .then(() => {
-                    document.getElementById("createUserMessage").innerText = "User created successfully!";
-                    // Optionally, you can redirect to another page or perform other actions here
-                })
-                .catch(error => console.error('Error updating CSV file:', error));
-            }
-        })
-        .catch(error => console.error('Error fetching CSV file:', error));
-});
     </script>
 </body>
 </html>
