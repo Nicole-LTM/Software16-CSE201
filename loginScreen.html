@@ -62,7 +62,7 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form id="loginForm">
+        <form action="login.php" method="post"> <!-- Form submits data to login.php -->
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -72,11 +72,8 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit" class="btn-login">Login</button>
-            <p id="loginMessage" ></p>
+            <p id="loginMessage"></p>
         </form>
     </div>
-    <script>
-    
-    </script>
 </body>
 </html>
