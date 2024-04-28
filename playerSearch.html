@@ -23,6 +23,7 @@
         }
         #title {
           text-align: center;
+          font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         
         }
         #result div {
@@ -53,7 +54,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./selectScreen.html" style="background-color: #0d6efd;">Home</a>
+            <a class="nav-link active" aria-current="page" href="./index.html" style="background-color: #0d6efd;">Home</a>
           </li>
         </ul>
       </div>
@@ -108,7 +109,7 @@
 
 
       <div id="result" class = "col-md">
-
+        <img src="https://st2.depositphotos.com/3334457/5627/i/450/depositphotos_56276551-stock-photo-american-football-player-in-action.jpg" alt="Football players" class = "img-fluid rounded" width = "1000px" height = "700px">
       </div>
       </div>
     </div>
@@ -120,7 +121,11 @@
       
       function loadData() {
           var xhr = new XMLHttpRequest();
+<<<<<<< HEAD
           xhr.open("GET", "http://10.31.66.216/FinalData/General/playerPaths.csv", true);
+=======
+          xhr.open("GET", "http://10.75.3.181/playerData/QBData.csv", true);
+>>>>>>> be397114c965b7f0133c7e43f06a7f7b6ef97c71
           xhr.onreadystatechange = function () {
               if (xhr.readyState === 4 && xhr.status === 200) {
                   var csvData = xhr.responseText;
@@ -157,12 +162,22 @@
     const searchTerm = document.getElementById('search-bar').value.toLowerCase();
     const playerData = window.parsedData.find(item => item['PLAYER'].toLowerCase() === searchTerm);
 
+<<<<<<< HEAD
     if (playerData) {
         const filePath = `http://10.31.66.216/FinalData/SeasonSummary/${playerData['FILEPATH']}.csv`;
         loadPlayerStats(filePath, playerData['PLAYER']);  // Pass the player's name to match stats
     } else {
         document.getElementById('result').innerHTML = '<p>Player not found.</p>';
     }
+=======
+    const filteredData = window.parsedData.filter(item => {
+        const matchesName = item['PLAYER'].toLowerCase().includes(searchTerm);
+        let matchesYear = item['YEAR'] === yearFilter; // Directly compare to 'YEAR' field in your data
+        return matchesName && (!yearFilter || matchesYear);
+    });
+
+    document.getElementById('result').innerHTML = `<pre>${JSON.stringify(filteredData, null, 2)}</pre>`;
+>>>>>>> be397114c965b7f0133c7e43f06a7f7b6ef97c71
 }
 
 

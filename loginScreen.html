@@ -57,6 +57,16 @@
         .btn-login:hover {
             background-color: #0056b3;
         }
+        #homeButton {
+          background-color: #218838;
+          width: 100%;
+          padding: 10px;
+          font-size: 16px;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -72,37 +82,14 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit" class="btn-login">Login</button>
+            <a href="./index.html">
+              <button id='homeButton' type="button" class="btn">Home</button>
+            </a>
             <p id="loginMessage" ></p>
         </form>
     </div>
     <script>
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent the form from submitting
     
-    // Get input values
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-    
-    // Fetch CSV file
-    fetch('./Users.csv')
-        .then(response => response.text())
-        .then(data => {
-            // Parse CSV data
-            var rows = data.split('\n');
-            var users = rows.map(row => row.split(','));
-            
-            // Check if username and password match
-            var validLogin = users.some(user => user[0] === username && user[1] === password);
-            
-            if (validLogin) {
-                document.getElementById("loginMessage").innerText = "Login successful!";
-                window.location.replace("./selectScreen.html");
-            } else {
-                document.getElementById("loginMessage").innerText = "Invalid username or password.";
-            }
-        })
-        .catch(error => console.error('Error fetching CSV file:', error));
-    });
     </script>
 </body>
 </html>
