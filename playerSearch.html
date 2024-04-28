@@ -120,7 +120,7 @@
       
       function loadData() {
           var xhr = new XMLHttpRequest();
-          xhr.open("GET", "http://172.25.24.54/playerData/QBData.csv", true);
+          xhr.open("GET", "http://10.31.66.216/FinalData/General/playerPaths.csv", true);
           xhr.onreadystatechange = function () {
               if (xhr.readyState === 4 && xhr.status === 200) {
                   var csvData = xhr.responseText;
@@ -155,16 +155,46 @@
     }
 
     const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-    const yearFilter = document.getElementById('yearFilter').value;
+    const playerData = window.parsedData.find(item => item['PLAYER'].toLowerCase() === searchTerm);
 
-    const filteredData = window.parsedData.filter(item => {
-        const matchesName = item['full_name'].toLowerCase().includes(searchTerm);
-        let matchesYear = item['YEAR'] === yearFilter; // Directly compare to 'YEAR' field in your data
-        return matchesName && (!yearFilter || matchesYear);
-    });
-
-    document.getElementById('result').innerHTML = `<pre>${JSON.stringify(filteredData, null, 2)}</pre>`;
+    if (playerData) {
+        const filePath = `http://10.31.66.216/FinalData/SeasonSummary/${playerData['FILEPATH']}.csv`;
+        loadPlayerStats(filePath, playerData['PLAYER']);  // Pass the player's name to match stats
+    } else {
+        document.getElementById('result').innerHTML = '<p>Player not found.</p>';
+    }
 }
+
+
+function loadPlayerStats(filePath, playerName) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", filePath, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var csvData = xhr.responseText;
+            var statsData = parseCSV(csvData);
+            displayStats(statsData, playerName);  // Pass playerName to the display function
+        } else if (xhr.readyState === 4) {
+            console.error('Failed to fetch player stats: Status Code: ' + xhr.status);
+        }
+    };
+    xhr.send();
+}
+
+
+function displayStats(statsData, playerName) {
+    // Filter the stats to only include those for the specified player
+    const playerStats = statsData.filter(stat => stat['PLAYER'].toLowerCase() === playerName.toLowerCase());
+
+    if (playerStats.length > 0) {
+        document.getElementById('result').innerHTML = `<pre>${JSON.stringify(playerStats, null, 2)}</pre>`;
+    } else {
+        document.getElementById('result').innerHTML = '<p>No stats found for this player.</p>';
+    }
+}
+
+
+
 
       
 function comparePlayers() {
@@ -179,11 +209,11 @@ function comparePlayers() {
 
     // Filter data for both players based on the name and the selected year or "TOTAL"
     const player1Data = window.parsedData.filter(item => 
-        item['full_name'].toLowerCase().includes(player1Name) &&
+        item['PLAYER'].toLowerCase().includes(player1Name) &&
         (item['YEAR'] === yearFilter || yearFilter === "TOTAL" || yearFilter === "")
     );
     const player2Data = window.parsedData.filter(item => 
-        item['full_name'].toLowerCase().includes(player2Name) &&
+        item['PLAYER'].toLowerCase().includes(player2Name) &&
         (item['YEAR'] === yearFilter || yearFilter === "TOTAL" || yearFilter === "")
     );
 
