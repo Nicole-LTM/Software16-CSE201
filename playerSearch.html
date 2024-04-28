@@ -121,11 +121,7 @@
       
       function loadData() {
           var xhr = new XMLHttpRequest();
-<<<<<<< HEAD
           xhr.open("GET", "http://10.31.66.216/FinalData/General/playerPaths.csv", true);
-=======
-          xhr.open("GET", "http://10.75.3.181/playerData/QBData.csv", true);
->>>>>>> be397114c965b7f0133c7e43f06a7f7b6ef97c71
           xhr.onreadystatechange = function () {
               if (xhr.readyState === 4 && xhr.status === 200) {
                   var csvData = xhr.responseText;
@@ -162,22 +158,12 @@
     const searchTerm = document.getElementById('search-bar').value.toLowerCase();
     const playerData = window.parsedData.find(item => item['PLAYER'].toLowerCase() === searchTerm);
 
-<<<<<<< HEAD
     if (playerData) {
         const filePath = `http://10.31.66.216/FinalData/SeasonSummary/${playerData['FILEPATH']}.csv`;
         loadPlayerStats(filePath, playerData['PLAYER']);  // Pass the player's name to match stats
     } else {
         document.getElementById('result').innerHTML = '<p>Player not found.</p>';
     }
-=======
-    const filteredData = window.parsedData.filter(item => {
-        const matchesName = item['PLAYER'].toLowerCase().includes(searchTerm);
-        let matchesYear = item['YEAR'] === yearFilter; // Directly compare to 'YEAR' field in your data
-        return matchesName && (!yearFilter || matchesYear);
-    });
-
-    document.getElementById('result').innerHTML = `<pre>${JSON.stringify(filteredData, null, 2)}</pre>`;
->>>>>>> be397114c965b7f0133c7e43f06a7f7b6ef97c71
 }
 
 
