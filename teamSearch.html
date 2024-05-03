@@ -127,8 +127,7 @@
         <br>
         <input type ="button" id = "Offense" onclick='Table()'value="Offense" class="buttons">
         <input type ="button" id = "Defense" onclick='Table()' value="Defense" class="buttons">
-        <input type ="button" id = "SpecialTeams" onclcik='Table()' value="Special Teams" class="buttons">
-        <input type ="button" id = "Roster" onclick='Table()' value="Roster" class="buttons">
+        <input type ="button" id = "SPTeams" onclick='Table()' value="SPTemas" class="buttons">
 
         <br>
     </div>
@@ -137,7 +136,6 @@
             <div id="tableContainer" class="container-fluid">
             </div>
             <h2 id="tableTitle">Scoring Data</h2>
-            <article class ="content">
               <table id="csvTable">
                   <thead>
                     <tr></tr>
@@ -145,27 +143,23 @@
                   <tbody>
                   </tbody>
               </table> 
-              </article>
         </div>
         <script>
           // Create tables
           function Table() {
+            var data;
             // Selecting search file based on button
             if (event.target.id === "Defense") {
-              var data = 'http://localhost:8000/DataForTeamSearch/DefenseScoring.csv';
+              data = 'http://localhost:8000/DataForTeamSearch/DefenseScoring.csv';
               // var data = 'http://<server Ip>/DataForTeamSearch/DefenseScoring.csv';
-              document.getElementById("tableTitle").innerHTML.replace("Defense Scoring");
-
+                tableTitle.innerHTML = "Defense Scoring";
             } else if (event.target.id === "Offense") {
-              var data = 'http://localhost:8000/DataForTeamSearch/OffenseScoring.csv';
+              data = 'http://localhost:8000/DataForTeamSearch/OffenseScoring.csv';
               // var data = 'http://<server Ip>/DataForTeamSearch/OffenseScoring.csv';
-
-            // } else if (event.target.id ==- "SpecialTeams") {
-            //   var data = '';
-            } else if (event.target.id === "Roster") {
-              var data = 'http://localhost:8000/DataForTeamSearch/RosterV3.csv';
-              // var data = 'http://<server Ip>/DataForTeamSearch/RosterV3.csv';
-
+                tableTitle.innerHTML = "Offense Scoring"
+            } else if (event.target.id === "SPTeams") {
+              data = 'http://localhost:8000/DataForTeamSearch/SPTScoring.csv';
+              tableTitle.innerHTML = "Special Teams Scoring";
             };
             // Creating table using csv
             fetch(data)
@@ -220,64 +214,26 @@
               });
           }
 
-          function search() {
-            // Declare variables
-            var inputName, filter, table, tr, td, i, txtValue;
-            inputName = document.getElementById("search-bar");
-            inputYear = document.getElementById("yearFilter");
+           function search() {
+              var inputYear = document.getElementById("yearFilter").value.toUpperCase();
+              var inputName = document.getElementById("search-bar").value.toUpperCase();
+              var table = document.getElementById("csvTable");
+              var rows = table.getElementsByTagName("tr");
 
-            filter = inputName.value.toUpperCase();
-            table = document.getElementById("csvTable");
-            tr = table.getElementsByTagName("tr");
-
-            for (i = 0; i < tr.length; i++) {
-              td = tr[i].getElementsByTagName("td")[1];
-              if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                  tr[i].style.display = "";
-                } else {
-                  tr[i].style.display = "none";
-                }
+              for (var i = 0; i < rows.length; i++) {
+                  var year = rows[i].getElementsByTagName("td")[0];
+                  var name = rows[i].getElementsByTagName("td")[1];
+                  if (year && name) {
+                      var yearValue = year.textContent || year.innerText;
+                      var nameValue = name.textContent || name.innerText;
+                      if (yearValue.toUpperCase().indexOf(inputYear) > -1 && nameValue.toUpperCase().indexOf(inputName) > -1) {
+                          rows[i].style.display = "";
+                      } else {
+                          rows[i].style.display = "none";
+                      }
+                  }
               }
-            }
           }
-
-     
-            function getyear() {
-                var year = document.getElementById("yearFilter");
-                var value = selectElement.options[selectElement.selectedIndex].text;
-
-            }
-
-          // function changeTitle() {
-          //   if (event.target.id === "Defense") {
-          //     var newTitle = "Defense Scoring";
-          //   } else if (event.target.id === "Offense") {
-          //     var newTitle = "Offense Scorring";
-          //   } else if (event.target.id ==- "SpecialTeams") {
-          //     var newTitle = "SpecialTeams";
-          //   } else if (event.target.id === "Roster") {
-          //     var newTitle = "Roster";
-          //   };
-
-            // document.getElementById("tableTitle").innerHTML.replace("newTitle");
-
-          // }
-          function changeTitle() {
-            if (event.target.id === "Defense") {
-              document.getElementById("tableTitle").innerHTML.replace("Defense Scoring");
-            } else if (event.target.id === "Offense") {
-              document.getElementById("tableTitle").innerHTML.replace("Offense Scoring");
-            // } else if (event.target.id ==- "SpecialTeams") {
-            //   var data = '';
-            } else if (event.target.id === "Roster") {
-              document.getElementById("tableTitle").innerHTML.replace("Roster");
-            };
-
-          }
-
-         
         </script> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </div>
