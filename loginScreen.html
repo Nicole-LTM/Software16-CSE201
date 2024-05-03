@@ -96,12 +96,9 @@
 <script>
     function saveData() {
         event.preventDefault();
-        let email, password;
+        let email, password, loggedIn;
         email=document.getElementById("email").value;
         password=document.getElementById("password").value;
-
-        //localStorage.setItem("username", name);
-        //localStorage.setItem("password", password);
         let user_record=new Array();
         user_record=JSON.parse(localStorage.getItem("users"))?JSON.parse(localStorage.getItem("users")):[]
         if(user_record.some((v)=>{
@@ -114,6 +111,7 @@
 
             localStorage.setItem("username", current_user.username);
             localStorage.setItem("email",current_user.email);
+            localStorage.setItem("loggedIn", true);
             window.location.href="./index.html"
         } else {
             alert("User not found!");

@@ -72,7 +72,7 @@
 <body>
     <div class="create-account-container">
         <h2>Create Account</h2>
-        <form action="#">
+        <form action="#" onsubmit="saveData(event)">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
@@ -96,6 +96,7 @@
 </body>
 <script>
     function saveData() {
+        event.preventDefault();
         let username, email, password;
         username=document.getElementById("username").value;
         email=document.getElementById("email").value
@@ -107,13 +108,14 @@
         })){
             alert("Account already exists, try login");
         } else {
+            alert("Account Created!")
             user_records.push({
                 "username":username,
                 "email":email,
                 "password":password
             })
             localStorage.setItem("users",JSON.stringify(user_records));
-            alert("Account Created!")
+            window.location.href("./loginScreen.html");
 
         }
 
