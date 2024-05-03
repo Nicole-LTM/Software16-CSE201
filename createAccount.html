@@ -72,24 +72,51 @@
 <body>
     <div class="create-account-container">
         <h2>Create Account</h2>
-        <form action="createAccount.php" method="post">
+        <form action="#">
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
             </div>
-            <button type="submit" class="btn-create-account">Create Account</button>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+            </div>
+            <button type="submit" onclick="saveData()" class="btn-create-account">Create Account</button>
+            <br>
             <br>
             <a href="./index.html">
               <button id='homeButton' type="button" class="btn">Home</button>
             </a>
         </form>
     </div>
-    <script>
-
-    </script>
 </body>
+<script>
+    function saveData() {
+        let username, email, password;
+        username=document.getElementById("username").value;
+        email=document.getElementById("email").value
+        password=document.getElementById("password").value;
+        let user_records=new Array();
+        user_records=JSON.parse(localStorage.getItem("users"))?JSON.parse(localStorage.getItem("users")):[]
+        if(user_records.some((v)=>{
+            return v.email==email
+        })){
+            alert("Account already exists, try login");
+        } else {
+            user_records.push({
+                "username":username,
+                "email":email,
+                "password":password
+            })
+            localStorage.setItem("users",JSON.stringify(user_records));
+            alert("Account Created!")
+
+        }
+
+    }
+</script>
 </html>
