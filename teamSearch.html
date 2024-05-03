@@ -150,15 +150,15 @@
             var data;
             // Selecting search file based on button
             if (event.target.id === "Defense") {
-              data = 'http://localhost:8000/DataForTeamSearch/DefenseScoring.csv';
+              data = 'DataForTeamSearch/DefenseScoring.csv';
               // var data = 'http://<server Ip>/DataForTeamSearch/DefenseScoring.csv';
                 tableTitle.innerHTML = "Defense Scoring";
             } else if (event.target.id === "Offense") {
-              data = 'http://localhost:8000/DataForTeamSearch/OffenseScoring.csv';
+              data = 'DataForTeamSearch/OffenseScoring.csv';
               // var data = 'http://<server Ip>/DataForTeamSearch/OffenseScoring.csv';
                 tableTitle.innerHTML = "Offense Scoring"
             } else if (event.target.id === "SPTeams") {
-              data = 'http://localhost:8000/DataForTeamSearch/SPTScoring.csv';
+              data = 'DataForTeamSearch/SPTScoring.csv';
               tableTitle.innerHTML = "Special Teams Scoring";
             };
             // Creating table using csv
