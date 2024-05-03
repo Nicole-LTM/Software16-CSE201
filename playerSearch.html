@@ -17,227 +17,428 @@
         }
         #result {
             margin-top: 20px;
+            border: 1px solid #ccc; /* Add border to bound the result */
         }
         #main {
-          text-align: center;
+            text-align: center;
         }
         #title {
-          text-align: center;
-          font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        
+            text-align: center;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
         #result div {
-          font-weight: bold;
-          margin-top: 20px;
+            font-weight: bold;
+            margin-top: 20px;
         }
-
         #result pre {
-          background-color: #000000;
-          border: 1px solid #000000;
-          padding: 10px;
+            background-color: #2f3336;
+            border: 1px solid #2f3336;
+            padding: 10px;
         }
-
-        
-        
-
-
+        .comparebtn{
+            height: 200px
+        }
+        input[type="number"] {
+            width: 70px; /* Adjust width as needed */
+            padding: 5px; /* Adjust padding as needed */
+            border: 1px solid #19478b; /* Match border color with website theme */
+            border-radius: 5px; /* Apply border radius for rounded corners */
+            font-size: 14px; /* Match font size with website theme */
+            margin-bottom: 10px; /* Add some spacing between input boxes */
+            background-color: #2f3336;
+            overflow: hidden; /* Hide the scrollbar */
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .comparebtn {
+            height: 50px; /* Adjust the height as needed */
+        }
+    </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./index.html" style="background-color: #0d6efd;">Home</a>
-          </li>
-        </ul>
-      </div>
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="./index.html" style="background-color: #0d6efd;">Home</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </nav>
-    <div id = "title" class = "row-md justify-content-center">
+</nav>
+<div id="title" class="row-md justify-content-center">
     <h1>Player Searcher</h1>
+</div>
+<div id="main" class="container-fluid">
+    <div class="row-md justify-content-center">
+        <div class="col-md">
+            <!-- Added File Input for CSV -->
+            <input type="file" id="csvFileInput" accept=".csv">
+            <br>
+            <div class="row align-items-center">
+                <div class="col">
+                    <label for="player1">Player 1:</label>
+                    <input type="text" id="player1" class="form-control" placeholder="Enter first player name">
+                </div>
+                <div class="col-md-auto">
+                    <button type="button" onclick="readyData()" class="btn btn-primary" id="comparebtn">Compare</button>
+                </div>
+                <div class="col">
+                    <label for="player2">Player 2:</label>
+                    <input type="text" id="player2" class="form-control" placeholder="Enter second player name">
+                </div>
+            </div>
+            <br>
+            <div class="row align-items-center">
+                <div class="col">
+                    <label for="yearFilter">Player 1 Year:</label>
+                    <select id="yearFilter" class="form-select">
+                        <option value="">All Years</option>
+                    </select>
+                    <script>
+                        const currentYear = new Date().getFullYear();
+                        for (let year = 1920; year <= currentYear; year++) {
+                            const option = document.createElement('option');
+                            option.value = year;
+                            option.textContent = year;
+                            document.getElementById('yearFilter').appendChild(option);
+                        }
+                    </script>
+                </div>
+                <div class="col">
+                    <label for="yearFilter2">Player 2 Year:</label>
+                    <select id="yearFilter2" class="form-select">
+                        <option value="">All Years</option>
+                    </select>
+                    <script>
+                        const currentYear2 = new Date().getFullYear();
+                        for (let year = 1920; year <= currentYear2; year++) {
+                            const option = document.createElement('option');
+                            option.value = year;
+                            option.textContent = year;
+                            document.getElementById('yearFilter2').appendChild(option);
+                        }
+                    </script>
+                </div>
+            </div>
+            <br>
+            <span id="status"></span>
+            <br>
+            <!-- Year filter dropdown -->
+            
+            <label for="YDS">YDS:</label>
+            <input type="number" id="YDS" name="YDS" min="0">
+            
+            <label for="AVG">AVG:</label>
+            <input type="number" id="AVG" name="AVG" min="0">
+            
+            <label for="FGM">FGM:</label>
+            <input type="number" id="FGM" name="FGM" min="0">
+            
+            <label for="XPM">XPM:</label>
+            <input type="number" id="XPM" name="XPM" min="0">
+            
+            <label for="SCK">SCK:</label>
+            <input type="number" id="SCK" name="SCK" min="0">
+            
+            <label for="INT">INT:</label>
+            <input type="number" id="INT" name="INT" min="0">
+
+        </div>
+        <div id="footballPic">
+            <img src="https://st2.depositphotos.com/3334457/5627/i/450/depositphotos_56276551-stock-photo-american-football-player-in-action.jpg" alt="Football players" class = "img-fluid rounded" width = "1000px" height = "700px">
+        </div>
+        <div id="result" class="col-md">
+            <div id="player1Data" class="col-md-6" style="float: left; border-right: 1px solid #ccc;">
+                <!-- Player 1 data will be displayed here -->
+            </div>
+            <div id="player2Data" class="col-md-6" style="float: right;">
+                <!-- Player 2 data will be displayed here -->
+            </div>
+        </div>
     </div>
-    <div id="main" class = "container-fluid">
-      <div class = "row-md justify-content-center">
-      <div class = "col-md">
-        <!-- Added File Input for CSV -->
-        <input type="file" id="csvFileInput" accept=".csv">
-        <label for="search-bar">Search:</label>
-        <label for="player1">Player 1:</label>
-        <input type="text" id="player1" placeholder="Enter first player name">
+</div>
 
-        <label for="player2">Player 2:</label>
-        <input type="text" id="player2" placeholder="Enter second player name">
+<script>
+    var genPlayer1;
+    var genPlayer2;
 
-        <button type="button" onclick="comparePlayers()" class="btn btn-primary">Compare</button>
-        <input type="text" id="search-bar" placeholder="Enter player name here">
-        
-        <button id="search-button" type="button" onclick="runProgram()" class="btn btn-primary" disabled>Search</button>
-        <span id="status"></span>
-        <br>
-        <!-- Year filter dropdown -->
-<label for="yearFilter">Year:</label>
-<select id="yearFilter">
-    <option value="">All Years</option>
-    <option value="TOTAL">TOTAL</option>
-    <script>
-        const currentYear = new Date().getFullYear();
-        for (let year = 2005; year <= currentYear; year++) {
-            document.write('<option value="' + year + '">' + year + '</option>');
-        }
-    </script>
-</select>
-
-
-        <input type ="checkbox" id = "filter2" value= "filter1">
-        <label for="filter2"> Filter </label>
-        <input type ="checkbox" id = "filter3" value= "filter1">
-        <label for="filter3"> Filter </label>
-        <input type ="checkbox" id = "filter4" value= "filter1">
-        <label for="filter4"> Filter </label>
-        <input type ="checkbox" id = "filter5" value= "filter1">
-        <label for="filter5"> Filter </label>
-      
-    </div>
-      
-
-
-      <div id="result" class = "col-md">
-        <img src="https://st2.depositphotos.com/3334457/5627/i/450/depositphotos_56276551-stock-photo-american-football-player-in-action.jpg" alt="Football players" class = "img-fluid rounded" width = "1000px" height = "700px">
-      </div>
-      </div>
-    </div>
-
-    <script>
-      window.onload = function() {
-          loadData();  // Load data as soon as the page is ready
-      };
-      
-      function loadData() {
-          var xhr = new XMLHttpRequest();
-          xhr.open("GET", "http://10.31.66.216/FinalData/General/playerPaths.csv", true);
-          xhr.onreadystatechange = function () {
-              if (xhr.readyState === 4 && xhr.status === 200) {
-                  var csvData = xhr.responseText;
-                  window.parsedData = parseCSV(csvData);
-                  document.getElementById('search-button').disabled = false;  // Enable search button
-                  document.getElementById('status').textContent = 'Data loaded. Ready to search!';  // Update status
-              } else if (xhr.readyState === 4) {
-                  console.error('Failed to fetch data: Status Code: ' + xhr.status);
-                  document.getElementById('status').textContent = 'Failed to load data. Check console for errors.';
-              }
-          };
-          xhr.send();
-          document.getElementById('status').textContent = 'Loading data...';  // Indicate loading status
-      }
-      
-      function parseCSV(csvData) {
-          const lines = csvData.split('\n').map(line => line.trim()).filter(line => line);
-          const headers = lines.shift().split(',');
-          return lines.map(line => {
-              const values = line.split(',');
-              return headers.reduce((obj, header, index) => {
-                  obj[header] = values[index];
-                  return obj;
-              }, {});
-          });
-      }
-      
-      function runProgram() {
-    if (!window.parsedData) {
-        alert("Data is not yet loaded, please wait.");
-        return;
+    function getPlayer1Name() {
+        return document.getElementById('player1').value;
     }
 
-    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-    const playerData = window.parsedData.find(item => item['PLAYER'].toLowerCase() === searchTerm);
-
-    if (playerData) {
-        const filePath = `http://10.31.66.216/FinalData/SeasonSummary/${playerData['FILEPATH']}.csv`;
-        loadPlayerStats(filePath, playerData['PLAYER']);  // Pass the player's name to match stats
-    } else {
-        document.getElementById('result').innerHTML = '<p>Player not found.</p>';
+    function getPlayer2Name() {
+        return document.getElementById('player2').value;
     }
+
+    function getPlayer1Year() {
+        return document.getElementById('yearFilter').value;
+    }
+
+    function getPlayer2Year() {
+        return document.getElementById('yearFilter2').value;
+    }
+
+    function getYDS() {
+        return document.getElementById('YDS').value;
+}
+
+    function getAVG() {
+        return document.getElementById('AVG').value;
+}
+
+    function getFGM() {
+        return document.getElementById('FGM').value;
+}
+
+    function getXPM() {
+        return document.getElementById('XPM').value;
+}
+
+    function getSCK() {
+        return document.getElementById('SCK').value;
+}
+
+    function getINT() {
+        return document.getElementById('INT').value;
 }
 
 
-function loadPlayerStats(filePath, playerName) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", filePath, true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var csvData = xhr.responseText;
-            var statsData = parseCSV(csvData);
-            displayStats(statsData, playerName);  // Pass playerName to the display function
-        } else if (xhr.readyState === 4) {
-            console.error('Failed to fetch player stats: Status Code: ' + xhr.status);
-        }
-    };
-    xhr.send();
+    function readyData(){
+        document.getElementById('player1Data').innerHTML = "Player 1 Name: " + getPlayer1Name() + "<br>" +
+                                                            "Player 1 Year: " + getPlayer1Year();
+        document.getElementById('player2Data').innerHTML = "Player 2 Name: " + getPlayer2Name() + "<br>" +
+                                                            "Player 2 Year: " + getPlayer2Year();
+        logCSVRows('./FinalData/General/playerPaths.csv', getPlayer1Name(), getPlayer2Name());
+    }
+
+    function sanitizeString(input) {
+    // Convert the string to lowercase
+    let lowercaseString = input.toLowerCase();
+
+    // Remove any characters that are not in the range a-z
+    let sanitizedString = lowercaseString.replace(/[^a-z]/g, '');
+
+    return sanitizedString;
+}
+
+    function logCSVRows(csvFileName, playerName1, playerName2) {
+        fetch(csvFileName) // Fetch the CSV file
+            .then(response => response.text()) // Get the text content of the CSV
+            .then(csv => {
+                const rows = csv.split('\n'); // Split the CSV into rows
+                for (let i = 1; i < rows.length; i++) { // Loop through each row (skipping header row)
+                    const cells = rows[i].split(','); // Split the row into cells
+                    const playerName = cells[0].trim(); // Get the player name from the first cell (trim to remove whitespace)
+                    if (sanitizeString(playerName) === sanitizeString(playerName2)) { // Check if the player name matches playerName1 or playerName2
+                        genPlayer2 = rows[i];
+                    }
+                    if (sanitizeString(playerName) === sanitizeString(playerName1)){
+                        genPlayer1 = rows[i];
+                    }
+                }
+                //console.log(genPlayer1); // Log genPlayer1 after it's assigned
+                //console.log(genPlayer2); // Log genPlayer2 after it's assigned
+                let myheight = 0
+                displayPlayerData(genPlayer1, 'player1Data');
+                displayPlayerData(genPlayer2, 'player2Data');
+            })
+            .catch(error => console.error('Error fetching CSV file:', error)); // Log any errors
+    }
+
+
+    function displayPlayerData(playerData, divId) {
+    if (!playerData) return; // Check if player data exists
+
+    const data = playerData.split(',');
+    const playerDiv = document.getElementById(divId);
+    if (!playerDiv) return; // Check if the div exists
+
+    playerDiv.innerHTML = ""; // Clear previous content
+    document.getElementById("footballPic").innerHTML = "";
+
+    // Display player image
+    playerDiv.innerHTML += "<div id='playerInfo'>";
+    playerDiv.innerHTML += "<h3>" + data[0] + "</h3><br>";
+    playerDiv.innerHTML += "<div id='playerPicture' style='height: 400px; overflow: hidden;'><img src=" + data[8] + "," + data[9] + " style='width: auto; height: 100%; object-fit: contain;'></div>";
+    playerDiv.innerHTML += "</div>";
+
+    // Add padding div
+    playerDiv.innerHTML += "<div style='padding-top: 20px'></div>";
+
+    // Create a table
+    let tableHTML = "<table>";
+    tableHTML += "<tr><th>Team</th><th>Position</th><th>Jersey Number</th><th>Birth Date</th><th>Height</th><th>Weight</th><th>College</th></tr>";
+    tableHTML += "<tr>";
+    tableHTML += "<td>" + data[1] + "</td>";
+    tableHTML += "<td>" + data[2] + "</td>";
+    tableHTML += "<td>" + data[3] + "</td>";
+    tableHTML += "<td>" + data[4] + "</td>";
+    tableHTML += "<td>" + data[5] + "</td>";
+    tableHTML += "<td>" + data[6] + "</td>";
+    tableHTML += "<td>" + data[7] + "</td>";
+    tableHTML += "</tr>";
+    tableHTML += "</table>";
+
+    // Append the table to the playerDiv
+    playerDiv.innerHTML += tableHTML;
+
+    // Apply CSS styles
+    playerDiv.querySelector("#playerInfo").style.float = "left"; // Float the player info to the left
+    playerDiv.querySelector("table").style.borderCollapse = "collapse";
+    playerDiv.querySelector("table").style.width = "100%";
+    //playerDiv.querySelector("th, td").style.border = "1px solid #dddddd";
+    playerDiv.querySelector("th, td").style.padding = "8px";
+    //playerDiv.querySelector("th").style.backgroundColor = "#2f3336";
+    playerDiv.querySelector("tr:nth-child(even)").style.backgroundColor = "#2f3336";
+    
+    columnNum = divId[6]
+    formattedName = data[0]
+    formattedSzn = getPlayer1Year()
+    if (columnNum == 2){
+        formattedSzn = getPlayer2Year()
+    }
+
+    //console.log(data[10], divId, formattedName, formattedSzn)
+    processCSV(data[10], formattedName, formattedSzn, divId)
+}
+
+function processCSV(PATH, playerName, season, divId) {
+    const csvFileName = "FinalData/SeasonSummary/" + PATH + ".csv";
+
+    fetch(csvFileName) // Fetch the CSV file
+        .then(response => response.text()) // Get the text content of the CSV
+        .then(csv => {
+            // Process CSV data here
+            const rows = csv.split('\n'); // Split the CSV into rows
+            const header = rows[0].split(',').map(cell => cell.trim()); // Extract header row
+            
+            // Find column indices for PLAYER and SEASON
+            const playerIndex = header.indexOf("PLAYER");
+            const seasonIndex = header.indexOf("SEASON");
+
+            // If season is empty, create tables for all seasons the player played in
+            if (season === "") {
+                // Get unique seasons the player played in
+                const seasons = [];
+                for (let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].split(',').map(cell => cell.trim());
+                    if (cells[playerIndex] === playerName && !seasons.includes(cells[seasonIndex])) {
+                        PATH = PATH.trim()
+                        if (PATH === "QB" || PATH === "P" || PATH === "Receiver" || PATH === "Runner") {
+                            YDS = getYDS();
+                            AVG = getAVG();
+                            if (YDS || AVG) {
+                                const YDSIndex = header.indexOf("YDS");
+                                const AVGIndex = header.indexOf("AVG");
+                                if (YDS && parseFloat(cells[YDSIndex]) < parseFloat(YDS)) {
+                                    continue;
+                                }
+                                if (AVG && parseFloat(cells[AVGIndex]) < parseFloat(AVG)) {
+                                    continue;
+                                }
+                            }
+                        } else if (PATH === "K") {
+                            FGM = getFGM();
+                            XPM = getXPM();
+                            if (FGM || XPM) {
+                                const FGMIndex = header.indexOf("FGM");
+                                const XPMIndex = header.indexOf("XPM");
+                                if (FGM && parseFloat(cells[FGMIndex]) < parseFloat(FGM)) {
+                                    continue;
+                                }
+                                if (XPM && parseFloat(cells[XPMIndex]) < parseFloat(XPM)) {
+                                    continue;
+                                }
+                            }
+                        } else if (PATH === "Defense") {
+                            SCK = getSCK();
+                            INT = getINT();
+                            if (SCK || INT) {
+                                const SCKIndex = header.indexOf("SCK");
+                                const INTIndex = header.indexOf("INT");
+                                if (SCK && parseFloat(cells[SCKIndex]) < parseFloat(SCK)) {
+                                    continue;
+                                }
+                                if (INT && parseFloat(cells[INTIndex]) < parseFloat(INT)) {
+                                    continue;
+                                }
+                            }
+                        }
+                        seasons.push(cells[seasonIndex]);
+                    }
+                }
+
+                // Iterate through each unique season
+                seasons.forEach(season => {
+                    let tableHTML = "<table style='border-collapse: collapse; width: 50%; margin: auto; border: 1.5px solid #dddddd;'>";
+                    for (let i = 0; i < rows.length; i++) { // Loop through each row
+                        const cells = rows[i].split(',').map(cell => cell.trim()); // Split the row into cells
+                        
+                        // Check if the current row matches the provided playerName and season
+                        if (cells[playerIndex] === playerName && cells[seasonIndex] === season) {
+                            for (let j = 0; j < header.length; j++) { // Loop through each header cell
+                                if (header[j] !== "PLAYER") { // Skip displaying playerName
+                                    tableHTML += "<tr><td style='padding: 8px;'>" + header[j] + "</td>"; // Add header cell to table
+                                    if (j !== playerIndex) {
+                                        tableHTML += "<td style='padding: 8px; background-color: #2f3336; color: #ffffff;'>" + cells[j] + "</td>"; // Add data cell with different background color
+                                    }
+                                    tableHTML += "</tr>";
+                                }
+                            }
+                            break; // Exit loop after finding the matching row
+                        }
+                    }
+                    tableHTML += "</table>";
+
+                    // Append the table to the specified div
+                    document.getElementById(divId).innerHTML += tableHTML;
+                });
+            } else { // If season is not empty, create table for the specified season
+                let tableHTML = "<table style='border-collapse: collapse; width: 50%; margin: auto; border: 1.5px solid #dddddd;'>";
+                for (let i = 0; i < rows.length; i++) { // Loop through each row
+                    const cells = rows[i].split(',').map(cell => cell.trim()); // Split the row into cells
+                    
+                    // Check if the current row matches the provided playerName and season
+                    if (cells[playerIndex] === playerName && cells[seasonIndex] === season) {
+                        for (let j = 0; j < header.length; j++) { // Loop through each header cell
+                            if (header[j] !== "PLAYER") { // Skip displaying playerName
+                                tableHTML += "<tr><td style='padding: 8px;'>" + header[j] + "</td>"; // Add header cell to table
+                                if (j !== playerIndex) {
+                                    tableHTML += "<td style='padding: 8px; background-color: #2f3336; color: #ffffff;'>" + cells[j] + "</td>"; // Add data cell with different background color
+                                }
+                                tableHTML += "</tr>";
+                            }
+                        }
+                        break; // Exit loop after finding the matching row
+                    }
+                }
+                tableHTML += "</table>";
+
+                // Append the table to the specified div
+                document.getElementById(divId).innerHTML += tableHTML;
+            }
+        })
+        .catch(error => console.error('Error fetching CSV file:', error)); // Log any errors
 }
 
 
-function displayStats(statsData, playerName) {
-    // Filter the stats to only include those for the specified player
-    const playerStats = statsData.filter(stat => stat['PLAYER'].toLowerCase() === playerName.toLowerCase());
-
-    if (playerStats.length > 0) {
-        document.getElementById('result').innerHTML = `<pre>${JSON.stringify(playerStats, null, 2)}</pre>`;
-    } else {
-        document.getElementById('result').innerHTML = '<p>No stats found for this player.</p>';
-    }
-}
 
 
 
+</script>
 
-      
-function comparePlayers() {
-    if (!window.parsedData) {
-        alert("Data is not yet loaded, please wait.");
-        return;
-    }
-
-    const player1Name = document.getElementById('player1').value.toLowerCase().trim();
-    const player2Name = document.getElementById('player2').value.toLowerCase().trim();
-    const yearFilter = document.getElementById('yearFilter').value;
-
-    // Filter data for both players based on the name and the selected year or "TOTAL"
-    const player1Data = window.parsedData.filter(item => 
-        item['PLAYER'].toLowerCase().includes(player1Name) &&
-        (item['YEAR'] === yearFilter || yearFilter === "TOTAL" || yearFilter === "")
-    );
-    const player2Data = window.parsedData.filter(item => 
-        item['PLAYER'].toLowerCase().includes(player2Name) &&
-        (item['YEAR'] === yearFilter || yearFilter === "TOTAL" || yearFilter === "")
-    );
-
-    const resultDiv = document.getElementById('result');
-    if (player1Data.length > 0 && player2Data.length > 0) {
-        resultDiv.innerHTML = `
-            <h3>Comparison Results:</h3>
-            <div><strong>${player1Name.toUpperCase()}</strong></div>
-            <pre>${JSON.stringify(player1Data, null, 2)}</pre>
-            <div><strong>${player2Name.toUpperCase()}</strong></div>
-            <pre>${JSON.stringify(player2Data, null, 2)}</pre>
-        `;
-    } else {
-        resultDiv.innerHTML = `<p>No data found for one or both players.</p>`;
-    }
-}
-
-
-
-
-      
-      
-      </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
