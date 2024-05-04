@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <title>Create Account</title>
     <style>
         body {
@@ -95,30 +99,33 @@
     </div>
 </body>
 <script>
-    function saveData() {
+    function saveData(event) {
         event.preventDefault();
-        let username, email, password;
-        username=document.getElementById("username").value;
-        email=document.getElementById("email").value
-        password=document.getElementById("password").value;
-        let user_records=new Array();
-        user_records=JSON.parse(localStorage.getItem("users"))?JSON.parse(localStorage.getItem("users")):[]
-        if(user_records.some((v)=>{
-            return v.email==email
-        })){
+        let username = document.getElementById("username").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+        // Hash the password using SHA-256
+        let hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+
+        let user_records = JSON.parse(localStorage.getItem("users")) || [];
+        let favorite_players = JSON.parse(localStorage.getItem(username)) || [];
+
+        if (user_records.some((v) => {
+            return v.email === email;
+        })) {
             alert("Account already exists, try login");
         } else {
-            alert("Account Created!")
+            alert("Account Created!");
             user_records.push({
-                "username":username,
-                "email":email,
-                "password":password
-            })
-            localStorage.setItem("users",JSON.stringify(user_records));
-            window.location.href("./loginScreen.html");
-
+                "username": username,
+                "email": email,
+                "password": hashedPassword // Store the hashed password
+            });
+            localStorage.setItem("users", JSON.stringify(user_records));
+            localStorage.setItem(username, JSON.stringify(favorite_players));
+            window.location.href = "./loginScreen.html";
         }
-
     }
 </script>
 </html>
