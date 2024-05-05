@@ -251,9 +251,7 @@
                         genPlayer1 = rows[i];
                     }
                 }
-                //console.log(genPlayer1); // Log genPlayer1 after it's assigned
-                //console.log(genPlayer2); // Log genPlayer2 after it's assigned
-                let myheight = 0
+      
                 displayPlayerData(genPlayer1, 'player1Data');
                 displayPlayerData(genPlayer2, 'player2Data');
             })
@@ -317,7 +315,7 @@
     processCSV(data[10], formattedName, formattedSzn, divId)
 }
 
-function processCSV(PATH, playerName, season, divId) {
+    function processCSV(PATH, playerName, season, divId) {
     const csvFileName = "FinalData/SeasonSummary/" + PATH + ".csv";
 
     fetch(csvFileName) // Fetch the CSV file
@@ -448,10 +446,28 @@ function savePlayer(playerNum) {
         let savedPlayers = JSON.parse(localStorage.getItem(username)) || []; // Parse the JSON string or initialize as empty array
         savedPlayers.push(playername); // Add the player name to the array
         localStorage.setItem(username, JSON.stringify(savedPlayers)); // Store the updated array back in local storage
-        alert("Player Saved!");
     } else {
         alert("Cannot save player, not logged in");
     }
+}
+
+window.onload = function() {
+    var playerName = getParameterByName('player');
+    if (playerName) {
+        var inputField = document.getElementById("player1");
+        inputField.value = playerName;
+        readyData();
+    }
+};
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 </script>
 
