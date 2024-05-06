@@ -100,7 +100,6 @@
             padding: 12px;
         }
         .material-symbols-outlined:hover {
-            cursor: pointer !important;
             animation: rotate 0.5s forwards;
         }
         @keyframes rotate {
@@ -460,7 +459,7 @@
         savedPlayers.forEach(function(player) {
             let liElement = document.createElement("li");
             liElement.innerHTML = `
-                <div id="favoriteElement" style="display: flex; align-items: center;" onclick="favPlayerSearch('${player}')">
+                <div id="favoriteElement" style="display: flex; align-items: center; cursor: pointer !important;" onclick="favPlayerSearch('${player}')">
                     <div id="imageHolder"></div>
                     <h4 id="favPlayerName" style="flex: 1; text-align: center; margin-bottom: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${player}</h4>
                     <span class="material-symbols-outlined" onclick="removeFavPlayer(this.parentElement.parentElement, '${player}')">close</span>
