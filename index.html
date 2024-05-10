@@ -1,50 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Sports Stat Searcher</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-<style>
-        /* Add your CSS styles here */
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
             overflow: hidden;
         }
-        h3{
-            color:#cc3333;
+
+        h3 {
+            color: #cc3333;
         }
+
         #search-bar {
             width: 300px;
             padding: 8px;
             font-size: 16px;
         }
+
         #result {
             margin-top: 20px;
         }
+
         #main {
-          text-align: center;
-          font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            text-align: center;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
+
         #title {
-          text-align: center;
-          color: #cc3333; 
-          font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            text-align: center;
+            color: #cc3333;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
+
         .login-btn {
             position: absolute;
             top: 10px;
             right: 20px;
             font-family: Arial, Helvetica, sans-serif;
         }
+
         .logout-btn {
             position: absolute;
             top: 10px;
             right: 20px;
-            font-family: Arial, Helvetica, sans-serif; 
+            font-family: Arial, Helvetica, sans-serif;
         }
+
         .create-btn {
             position: absolute;
             top: 10px;
@@ -55,30 +65,36 @@
             transition: border-color 0.5s ease;
             font-family: Arial, Helvetica, sans-serif;
         }
+
         .create-btn:hover {
             background-color: #218838;
             border-color: #218838;
         }
+
         #sub-section {
             width: 100vw
         }
+
         .player-button {
             position: left;
             padding: 55px;
             font-size: 50px;
         }
+
         .team-button {
             position: right;
             padding: 55px;
             font-size: 50px;
         }
+
         #dashboard {
             color: grey;
             border: 4px solid grey;
             border-radius: 10px;
-            overflow:auto;
+            overflow: auto;
             max-height: 412px;
         }
+
         .football {
             position: absolute;
             width: 50px;
@@ -86,30 +102,38 @@
             background-image: url('football.png');
             background-size: cover;
         }
-        #savedPlayersList{
+
+        #savedPlayersList {
             list-style-type: none;
         }
-        #favoriteElement{
+
+        #favoriteElement {
             border: 1px solid grey;
             margin: 5px;
             border-radius: 10px;
         }
-        .material-symbols-outlined{
-            color: #cc3333; 
-            font-size: 40px; 
+
+        .material-symbols-outlined {
+            /*DONT CHANGE NAME USE THIS FOR THE CROSS*/
+            color: #cc3333;
+            font-size: 40px;
             padding: 12px;
         }
+
         .material-symbols-outlined:hover {
             animation: rotate 0.5s forwards;
         }
+
         @keyframes rotate {
             0% {
                 transform: rotate(0deg);
             }
+
             100% {
                 transform: rotate(180deg);
             }
         }
+
         .material-symbols-outlined:not(:hover) {
             animation: rotateBackward 0.5s forwards;
         }
@@ -118,14 +142,17 @@
             0% {
                 transform: rotate(180deg);
             }
+
             100% {
                 transform: rotate(0deg);
             }
         }
+
         .scale-out-center {
             -webkit-animation: scale-out-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-                    animation: scale-out-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+            animation: scale-out-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
         }
+
         /* ----------------------------------------------
         * Generated by Animista on 2024-5-5 15:21:21
         * Licensed under FreeBSD License.
@@ -139,263 +166,225 @@
         * ----------------------------------------
         */
         @-webkit-keyframes scale-out-center {
-        0% {
-            -webkit-transform: scale(1);
-                    transform: scale(1);
-            opacity: 1;
+            0% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+                opacity: 1;
+            }
         }
-        100% {
-            -webkit-transform: scale(0);
-                    transform: scale(0);
-            opacity: 1;
-        }
-        }
+
         @keyframes scale-out-center {
-        0% {
-            -webkit-transform: scale(1);
-                    transform: scale(1);
-            opacity: 1;
-        }
-        100% {
-            -webkit-transform: scale(0);
-                    transform: scale(0);
-            opacity: 1;
-        }
+            0% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+                opacity: 1;
+            }
         }
 
         #favoriteElement {
-  border: 1px solid grey;
-  margin: 5px;
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-}
+            border: 1px solid grey;
+            margin: 5px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
 
-/* Add a pseudo-element for the sliding background */
-#favoriteElement::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%; /* Start the background outside the element */
-  width: 100%;
-  height: 100%;
-  background-color: #2f3336;
-  transition: left 0.5s; /* Add a transition for smooth animation */
-  z-index: -1; /* Position the background behind other content */
-}
+        #favoriteElement::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: #2f3336;
+            transition: left 0.5s;
+            z-index: -1;
+            /*the background color is behind the picture and text of favorite player*/
+        }
 
-/* Adjust the z-index of other elements to ensure they're on top */
-#favoriteElement:hover::before {
-  left: 0; /* Slide the background in from left to right */
-}
+        #favoriteElement:hover::before {
+            left: 0;
+        }
 
-/* Position the image, text, and cross above the background */
-#imageHolder,
-#favPlayerName,
-.material-symbols-outlined {
-  position: relative;
-  z-index: 1; /* Position the image, text, and cross above the background */
-}
+        #imageHolder,
+        #favPlayerName,
+        .material-symbols-outlined {
+            position: relative;
+            z-index: 1;
+            /*playername, image, and cross ontop of the background*/
+        }
     </style>
 </head>
+
 <body>
     <!-- This is our title -->
-    <div id = "title" class = "row-md justify-content-center">
+    <div id="title" class="row-md justify-content-center">
         <h1>Super Sport Stat Searcher</h1>
         <!-- Login and Signup buttons -->
         <div id="authButtons">
-            <a href = "./createAccount.html" id="signupLink">
-                <button class="create-btn btn btn-primary">Sign Up</button> 
+            <a href="./createAccount.html" id="signupLink">
+                <button class="create-btn btn btn-primary">Sign Up</button>
             </a>
-            <a href = "./loginScreen.html" id="loginlink">
-                <button class="login-btn btn btn-primary">Login</button> 
+            <a href="./loginScreen.html" id="loginlink">
+                <button class="login-btn btn btn-primary">Login</button>
             </a>
         </div>
     </div>
-    <div id="main" class = "container-fluid">
-      <div class = "row">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class = "col-md-3 col-3" id="dashboard">
-      <h1>Saved Players</h1>
-      <ul id="savedPlayersList">
-        <!--This is where the favorite players will be displayed-->
-      </ul>
-    </div>
-    <div class = "col-md-6 col-6">
-      <!-- main document body -->
-
-        <h3>Would you like to search for a player, or a team?</h3>
-        <br>
-        <a href="./playerSearch.html"></a>
-        <button class = "player-button btn btn-primary" onclick="window.location.href = './playerSearch.html'">Player</button>
-        <button class = "team-button btn btn-primary" onclick="window.location.href = './teamSearch.html'" >Team</button>
-        
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-
-        <div class = "row justify-content-center">
-            <div class = "col-md" id = "logo">
-                <img src="https://logos-world.net/wp-content/uploads/2023/08/NFL-team-logos-Your-guide-to-every-National-Football-League-logo.png" alt="Football with NFL logo and all team logos" class = "img-fluid" height = 300px width = 700px>
+    <div id="main" class="container-fluid">
+        <div class="row">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="col-md-3 col-3" id="dashboard">
+                <h1>Saved Players</h1>
+                <ul id="savedPlayersList">
+                    <!--This is where the favorite players will be displayed-->
+                </ul>
             </div>
-        </div>
-    </div>
-    <div class = "col-md-3 col-3">
-      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/National_Football_League_logo.svg/1200px-National_Football_League_logo.svg.png" alt="NFL logo" class = "img-fluid" height = 300px width = 300px> 
-    </div>
+            <div class="col-md-6 col-6">
+                <!-- main document body -->
 
-    <script>
-        function parseCSV(csvData) {
-        const lines = csvData.split('\n').map(line => line.trim()).filter(line => line);
-        const headers = lines.shift().split(',');
-        return lines.map(line => {
-            const values = line.split(',');
-            return headers.reduce((obj, header, index) => {
-                obj[header] = values[index];
-                return obj;
-            }, {});
-        });
-    }
+                <h3>Would you like to search for a player, or a team?</h3>
+                <br>
+                <a href="./playerSearch.html"></a>
+                <button class="player-button btn btn-primary"
+                    onclick="window.location.href = './playerSearch.html'">Player</button>
+                <button class="team-button btn btn-primary"
+                    onclick="window.location.href = './teamSearch.html'">Team</button>
 
-    function runProgram() {
-        const fileInput = document.getElementById('csvFileInput');
-        const file = fileInput.files[0];
-        if (!file) {
-            alert("Please select a CSV file.");
-            return;
-        }
 
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const data = event.target.result;
-            const parsedData = parseCSV(data);
-            filterAndDisplayResults(parsedData);
-        };
-        reader.readAsText(file);
-    }
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
 
-    function filterAndDisplayResults(parsedData) {
-    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-    const yearFilter = document.getElementById('yearFilter').value;
-    const type = document.querySelector('input[name="flag"]:checked').value;
-    
-    let filterProperty;
-    if (type === 'player') {
-        filterProperty = 'full_name';
-    } else if (type === 'team') {
-        filterProperty = 'team';
-    } else {
-        console.error('Unsupported filter type:', type);
-        return; // Early return if the filter type is unsupported
-    }
+                <div class="row justify-content-center">
+                    <div class="col-md" id="logo">
+                        <img src="https://logos-world.net/wp-content/uploads/2023/08/NFL-team-logos-Your-guide-to-every-National-Football-League-logo.png"
+                            alt="Football with NFL logo and all team logos" class="img-fluid" height=300px width=700px>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-3">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/National_Football_League_logo.svg/1200px-National_Football_League_logo.svg.png"
+                    alt="NFL logo" class="img-fluid" height=300px width=300px>
+            </div>
+            <script>
+                /*
+                Animates the footballs on window load
+                */
+                function animateBalls() {
+                    var screenWidth = window.innerWidth;
+                    var screenHeight = window.innerHeight;
+                    var highestZIndex = 9999; // Set a high z-index value for the balls
 
-    const filteredData = parsedData.filter(item => {
-        const matchesType = item[filterProperty] && item[filterProperty].toLowerCase().includes(searchTerm);
-        const matchesYear = item['season'] === yearFilter; // Match the season exactly
-        return matchesType && (!yearFilter || matchesYear);
-    });
+                    // Generate and animate 40 balls
+                    for (var i = 0; i < 40; i++) {
+                        setTimeout(function () {
+                            var football = document.createElement("div");
+                            football.classList.add("football");
+                            document.body.appendChild(football);
 
-    document.getElementById('result').innerHTML = `<pre>${JSON.stringify(filteredData, null, 2)}</pre>`;
-    }
+                            // Set the z-index of the football
+                            football.style.zIndex = highestZIndex;
 
-    function animateBalls() {
-    var screenWidth = window.innerWidth;
-    var screenHeight = window.innerHeight;
-    var highestZIndex = 9999; // Set a high z-index value for the balls
+                            var minDuration = 1300; // Minimum duration in milliseconds (0.8 seconds)
+                            var maxDuration = 1500; // Maximum duration in milliseconds (1.2 seconds)
+                            var duration = Math.random() * (maxDuration - minDuration) + minDuration; // Random duration between 0.8 and 1.2 seconds
 
-    // Generate and animate 40 balls
-    for (var i = 0; i < 40; i++) {
-        setTimeout(function() {
-            var football = document.createElement("div");
-            football.classList.add("football");
-            document.body.appendChild(football);
+                            var start = null; // start time of the animation
 
-            // Set the z-index of the football
-            football.style.zIndex = highestZIndex;
+                            // Start at the left side of the screen
+                            var startX = 0;
 
-            var minDuration = 1300; // Minimum duration in milliseconds (0.8 seconds)
-            var maxDuration = 1500; // Maximum duration in milliseconds (1.2 seconds)
-            var duration = Math.random() * (maxDuration - minDuration) + minDuration; // Random duration between 0.8 and 1.2 seconds
+                            // Start at the very top of the screen
+                            var startY = screenHeight / 2 + Math.random() * (screenHeight / 2 - 50);
 
-            var start = null; // start time of the animation
+                            // Random height for the peak of the arc
+                            var peakHeight = screenHeight / 4 + Math.random() * (screenHeight / 4);
 
-            // Start at the left side of the screen
-            var startX = 0;
+                            football.style.left = startX + "px";
+                            football.style.top = startY + "px";
 
-            // Start at the very top of the screen
-            var startY = screenHeight / 2 + Math.random() * (screenHeight / 2 - 50);
+                            function step(timestamp) {
+                                if (!start) start = timestamp;
+                                var progress = timestamp - start;
+                                var distance = screenWidth; // distance to travel (full width of the screen)
 
-            // Random height for the peak of the arc
-            var peakHeight = screenHeight / 4 + Math.random() * (screenHeight / 4);
+                                if (progress < duration) {
+                                    var percentage = progress / duration;
+                                    var arcX = percentage * distance;
+                                    var arcY = -4 * peakHeight / (distance * distance) * (arcX - distance / 2) * (arcX - distance / 2) + peakHeight;
 
-            football.style.left = startX + "px";
-            football.style.top = startY + "px";
+                                    // Prevent the football from going out of the screen
+                                    var newX = startX + arcX;
+                                    var newY = startY - arcY;
 
-            function step(timestamp) {
-                if (!start) start = timestamp;
-                var progress = timestamp - start;
-                var distance = screenWidth; // distance to travel (full width of the screen)
+                                    // Ensure the football stays within screen bounds
+                                    newX = Math.max(0, Math.min(screenWidth + 50, newX));
+                                    newY = Math.max(0, Math.min(screenHeight - 50, newY));
 
-                if (progress < duration) {
-                    var percentage = progress / duration;
-                    var arcX = percentage * distance;
-                    var arcY = -4 * peakHeight / (distance * distance) * (arcX - distance / 2) * (arcX - distance / 2) + peakHeight;
+                                    football.style.left = newX + "px";
+                                    football.style.top = newY + "px";
 
-                    // Prevent the football from going out of the screen
-                    var newX = startX + arcX;
-                    var newY = startY - arcY;
+                                    // Rotate the football by pi/2 radians over the animation time
+                                    var rotationAngle = percentage * (Math.PI / 2);
+                                    football.style.transform = "rotate(" + rotationAngle + "rad)";
 
-                    // Ensure the football stays within screen bounds
-                    newX = Math.max(0, Math.min(screenWidth + 50, newX));
-                    newY = Math.max(0, Math.min(screenHeight - 50, newY));
+                                    window.requestAnimationFrame(step);
+                                } else {
+                                    football.style.left = screenWidth + "px";
+                                    football.remove();
+                                }
+                            }
 
-                    football.style.left = newX + "px";
-                    football.style.top = newY + "px";
-
-                    // Rotate the football by pi/2 radians over the animation time
-                    var rotationAngle = percentage * (Math.PI / 2);
-                    football.style.transform = "rotate(" + rotationAngle + "rad)";
-
-                    window.requestAnimationFrame(step);
-                } else {
-                    football.style.left = screenWidth + "px";
-                    football.remove();
+                            window.requestAnimationFrame(step);
+                        }, i * 50);
+                    }
                 }
-            }
 
-            window.requestAnimationFrame(step);
-        }, i * 50);
-    }
-}
+                /*
+                HELPER: Checks to see if user is logged in
+                */
+                function isLoggedIn() {
+                    return localStorage.getItem("username") !== null;
+                }
 
-    function isLoggedIn() {
-      return localStorage.getItem("username") !== null;
-    }
+                /*
+                Checks to see if user is logged in and changes page accordingly
+                */
+                function updateAuthUI() {
+                    const authButtons = document.getElementById('authButtons');
 
-    function updateAuthUI() {
-        const authButtons = document.getElementById('authButtons');
-
-        if (isLoggedIn()) {
-            // Logged in: Replace login and signup buttons with welcome message and logout button
-            const username = localStorage.getItem('username'); // Assuming username is stored in local storage
-            authButtons.innerHTML = `
+                    if (isLoggedIn()) {
+                        // Logged in: Replace login and signup buttons with welcome message and logout button
+                        const username = localStorage.getItem('username'); // Assuming username is stored in local storage
+                        authButtons.innerHTML = `
                 <div id="welcomeMessage">Welcome ${username},</div>
                 <button id="logoutButton" class="logout-btn btn btn-primary">Logout</button>
             `;
-        } else {
-            // Not logged in: Restore login and signup buttons
-            authButtons.innerHTML = `
+                    } else {
+                        // Not logged in: Restore login and signup buttons
+                        authButtons.innerHTML = `
                 <a href="./createAccount.html" id="signupLink">
                     <button class="create-btn btn btn-primary">Sign Up</button>
                 </a>
@@ -403,108 +392,132 @@
                     <button class="login-btn btn btn-primary">Login</button>
                 </a>
             `;
-        }
-    }
-
-    function logout() {
-        localStorage.removeItem("username");
-        window.location.href = "./index.html";
-    }
-
-    function sanitizeString(input) {
-    // Convert the string to lowercase
-    let lowercaseString = input.toLowerCase();
-
-    // Remove any characters that are not in the range a-z
-    let sanitizedString = lowercaseString.replace(/[^a-z]/g, '');
-
-    return sanitizedString;
-}
-
-    function findFavoritePlayer(csvFilePath, favoriteName, favPlayerRow) {
-    fetch(csvFilePath)
-        .then(response => response.text())
-        .then(csv => {
-            const rows = csv.split('\n');
-            for (let i = 1; i < rows.length; i++) {
-                const cells = rows[i].split(',');
-                const playerName = sanitizeString(cells[0]);
-                const sanitizedFavoriteName = sanitizeString(favoriteName);
-                if (playerName === sanitizedFavoriteName) {
-                    //console.log(rows[i]);
-                    let pictureLink = cells[8] + "," + cells[9];
-                    console.log(cells[0])
-                    favPlayerImage = favPlayerRow.querySelector('div').querySelectorAll('div')[0];
-                    favPlayerName = favPlayerRow.querySelector('h4')
-                    favPlayerName.innerText = cells[0]
-                    favPlayerImage.innerHTML = `<img src=${pictureLink} height=75px style="border-radius: 10px;">`;
-                    //<img src=" + data[8] + "," + data[9] + " style='width: auto; height: 100%; object-fit: contain;'>
-                    return;
+                    }
                 }
-            }
-            //console.log("Favorite player not found in the CSV file.");
-            pictureLink = 'https://static.www.nfl.com/image/private/f_auto,q_auto/league/x4lmrcljrxe6cvkczfdt';
-            favPlayerImage = favPlayerRow.querySelector('div').querySelectorAll('div')[0];
-            favPlayerImage.innerHTML = `<img src=${pictureLink} height = 75px style="border-radius: 10px;">`;
-        })
-        .catch(error => console.error('Error fetching CSV file:', error)); // Log any errors
-    }
 
-    function outputFavorites() {
-        let username = localStorage.getItem("username");
-        let savedPlayers = JSON.parse(localStorage.getItem(username)) || [];
-        let ulElement = document.getElementById("savedPlayersList");
-        ulElement.innerHTML = "";
+                /*
+                logs out current user
+                */
+                function logout() {
+                    localStorage.removeItem("username");
+                    window.location.href = "./index.html";
+                }
 
-        savedPlayers.forEach(function(player) {
-            let liElement = document.createElement("li");
-            liElement.innerHTML = `
+                /*
+                formats string so that it is only lowercase letters. ONLY CHARACTERS [a-z]
+                */
+                function sanitizeString(input) {
+                    // Convert the string to lowercase
+                    let lowercaseString = input.toLowerCase();
+
+                    // Remove any characters that are not in the range a-z
+                    let sanitizedString = lowercaseString.replace(/[^a-z]/g, '');
+
+                    return sanitizedString;
+                }
+
+                /*
+                Finds favorite player data to display favorite player image
+                */
+                function findFavoritePlayer(csvFilePath, favoriteName, favPlayerRow) {
+                    fetch(csvFilePath)
+                        .then(response => response.text())
+                        .then(csv => {
+                            const rows = csv.split('\n');
+                            for (let i = 1; i < rows.length; i++) {
+                                const cells = rows[i].split(',');
+                                const playerName = sanitizeString(cells[0]);
+                                const sanitizedFavoriteName = sanitizeString(favoriteName);
+                                if (playerName === sanitizedFavoriteName) {
+                                    //console.log(rows[i]);
+                                    let pictureLink = cells[8] + "," + cells[9];
+                                    console.log(cells[0])
+                                    favPlayerImage = favPlayerRow.querySelector('div').querySelectorAll('div')[0];
+                                    favPlayerName = favPlayerRow.querySelector('h4')
+                                    favPlayerName.innerText = cells[0]
+                                    favPlayerImage.innerHTML = `<img src=${pictureLink} height=75px style="border-radius: 10px;">`;
+                                    //<img src=" + data[8] + "," + data[9] + " style='width: auto; height: 100%; object-fit: contain;'>
+                                    return;
+                                }
+                            }
+                            //console.log("Favorite player not found in the CSV file.");
+                            pictureLink = 'https://static.www.nfl.com/image/private/f_auto,q_auto/league/x4lmrcljrxe6cvkczfdt';
+                            favPlayerImage = favPlayerRow.querySelector('div').querySelectorAll('div')[0];
+                            favPlayerImage.innerHTML = `<img src=${pictureLink} height = 75px style="border-radius: 10px;">`;
+                        })
+                        .catch(error => console.error('Error fetching CSV file:', error)); // Log any errors
+                }
+
+                /*
+                Displays all of the users favorite players
+                */
+                function outputFavorites() {
+                    let username = localStorage.getItem("username");
+                    let savedPlayers = JSON.parse(localStorage.getItem(username)) || [];
+                    let ulElement = document.getElementById("savedPlayersList");
+                    ulElement.innerHTML = "";
+
+                    savedPlayers.forEach(function (player) {
+                        let liElement = document.createElement("li");
+                        liElement.innerHTML = `
                 <div id="favoriteElement" style="display: flex; align-items: center; cursor: pointer !important;" onclick="favPlayerSearch('${player}')">
                     <div id="imageHolder"></div>
                     <h4 id="favPlayerName" style="flex: 1; text-align: center; margin-bottom: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${player}</h4>
                     <span class="material-symbols-outlined" onclick="removeFavPlayer(this.parentElement.parentElement, '${player}')">close</span>
                 </div>`;
-            ulElement.appendChild(liElement);
-            findFavoritePlayer('./FinalData/General/playerPaths.csv', player, liElement);
-        });
-    }
+                        ulElement.appendChild(liElement);
+                        findFavoritePlayer('./FinalData/General/playerPaths.csv', player, liElement);
+                    });
+                }
 
-    function favPlayerSearch(playerName) {
-        var encodedPlayerName = encodeURIComponent(playerName);
-        window.location.href = "./playerSearch.html?player=" + encodedPlayerName;
-    }
+                /*
+                Gives favorite player list usage by making a quick link to searching that player stats up
+                */
+                function favPlayerSearch(playerName) {
+                    var encodedPlayerName = encodeURIComponent(playerName);
+                    window.location.href = "./playerSearch.html?player=" + encodedPlayerName;
+                }
 
-    function removeFavPlayer(liElement, player) {
-        liElement.classList.add('scale-out-center');
-        window.event.cancelBubble = true;
-        setTimeout(function() {
-            liElement.remove();
-        }, 500); // 500 milliseconds
+                /*
+                removes that player from favorite player list
+                */
+                function removeFavPlayer(liElement, player) {
+                    liElement.classList.add('scale-out-center');
+                    window.event.cancelBubble = true;
+                    setTimeout(function () {
+                        liElement.remove();
+                    }, 500); // 500 milliseconds
 
 
-        let username = localStorage.getItem("username");
-        let savedPlayers = JSON.parse(localStorage.getItem(username)) || [];
-        let index = savedPlayers.indexOf(player);
-        if (index > -1) {
-            savedPlayers.splice(index, 1);
-            localStorage.setItem(username, JSON.stringify(savedPlayers));
-        }
-        console.log(savedPlayers)
-    }
+                    let username = localStorage.getItem("username");
+                    let savedPlayers = JSON.parse(localStorage.getItem(username)) || [];
+                    let index = savedPlayers.indexOf(player);
+                    if (index > -1) {
+                        savedPlayers.splice(index, 1);
+                        localStorage.setItem(username, JSON.stringify(savedPlayers));
+                    }
+                    console.log(savedPlayers)
+                }
 
-    function initializePage() {
-        updateAuthUI();
-        animateBalls();
+                /*
+                init all things needed on window load
+                */
+                function initializePage() {
+                    updateAuthUI();
+                    animateBalls();
 
-        const logoutButton = document.getElementById('logoutButton');
-        logoutButton.addEventListener('click', function() {
-            logout();
-        })
-        outputFavorites();
-    }
+                    const logoutButton = document.getElementById('logoutButton');
+                    logoutButton.addEventListener('click', function () {
+                        logout();
+                    })
+                    outputFavorites();
+                }
 
-    window.onload = initializePage();
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+                window.onload = initializePage();
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
@@ -21,6 +22,7 @@
             background-color: #212529;
             color: #f0f0f0;
         }
+
         .login-container {
             /* background-color: #fff; */
             background-color: #313539;
@@ -28,16 +30,20 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .login-container h2 {
             text-align: center;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         .form-group label {
             display: block;
             margin-bottom: 5px;
         }
+
         .form-group input {
             width: 100%;
             padding: 8px;
@@ -49,6 +55,7 @@
             background-color: #e8e8e8;
             color: #6e6e6e;
         }
+
         .btn-login {
             width: 100%;
             padding: 10px;
@@ -59,38 +66,44 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         .btn-login:hover {
             background-color: #218838;
         }
+
         #homeButton {
-          background-color: blue;
-          width: 100%;
-          padding: 10px;
-          font-size: 16px;
-          color: #fff;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
+            background-color: blue;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
     </style>
 </head>
+
 <body>
     <div class="login-container">
         <h2>Login</h2>
         <form action="#" onsubmit="saveData(event)">
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="text" id="email" name="email" placeholder="Enter Email" required>
+                <input type="text" id="email" name="email" placeholder="Enter Email" required />
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password"
+                    required />
             </div>
-            <button type="submit" onclick="saveData()" class="btn-login">Login</button>
-            <br>
-            <br>
+            <button type="submit" onclick="saveData()" class="btn-login">
+                Login
+            </button>
+            <br />
+            <br />
             <a href="./index.html">
-              <button id='homeButton' type="button" class="btn">Home</button>
+                <button id="homeButton" type="button" class="btn">Home</button>
             </a>
         </form>
     </div>
@@ -108,7 +121,9 @@
 
         if (user) {
             // Hash the input password
-            let hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+            let hashedPassword = CryptoJS.SHA256(password).toString(
+                CryptoJS.enc.Hex
+            );
 
             // Compare hashed passwords
             if (hashedPassword === user.password) {
@@ -123,4 +138,5 @@
         }
     }
 </script>
+
 </html>
